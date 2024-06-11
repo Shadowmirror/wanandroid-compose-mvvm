@@ -15,6 +15,7 @@ object LogUtil {
      * @param isDebug   true: 调试状态即打印所有日志
      *                false: 上线状态即关闭所有日志的打印
      */
+    @Suppress("unused")
     fun isDebug(isDebug: Boolean) {
         this.isDebug = isDebug
     }
@@ -24,6 +25,7 @@ object LogUtil {
      *
      * @param tag 打印日志的Tag
      */
+    @Suppress("unused")
     fun setTag(tag: String) {
         this.tag = tag
     }
@@ -34,6 +36,7 @@ object LogUtil {
      * @param tag 打印的Tag
      * @param msg 打印的信息
      */
+    @Suppress("unused")
     fun v(tag: String, msg: String) {
         if (isDebug) {
             Log.v(tag, msg)
@@ -45,6 +48,7 @@ object LogUtil {
      *
      * @param msg 打印的信息
      */
+    @Suppress("unused")
     fun v(msg: String) {
         v(msg)
     }
@@ -87,6 +91,7 @@ object LogUtil {
      *
      * @param msg 打印的信息
      */
+    @Suppress("unused")
     fun i(msg: String) {
         i(tag, msg)
     }
@@ -108,6 +113,7 @@ object LogUtil {
      *
      * @param msg 打印的信息
      */
+    @Suppress("unused")
     fun w(msg: String) {
         w(tag, msg)
     }
