@@ -3,25 +3,24 @@ package miao.kmirror.wanandroid.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import miao.kmirror.wanandroid.base.BaseActivity
-import miao.kmirror.wanandroid.http.WanAndroidService
-import miao.kmirror.wanandroid.ui.theme.WanandroidTheme
-import javax.inject.Inject
+import miao.kmirror.wanandroid.ui.navigation.base.WanAndroidScreen
 
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
-    @Inject
-    lateinit var mWanAndroidService: WanAndroidService
+
+    private lateinit var navHostController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            WanandroidTheme {
-
-            }
+            navHostController = rememberNavController()
+            WanAndroidScreen(navHostController = navHostController)
         }
     }
 }

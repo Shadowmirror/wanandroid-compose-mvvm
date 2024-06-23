@@ -1,10 +1,8 @@
 package miao.kmirror.wanandroid
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
-import dagger.hilt.InstallIn
 import dagger.hilt.android.HiltAndroidApp
 import miao.kmirror.wanandroid.base.AppViewModel
 import miao.kmirror.wanandroid.base.BaseAppViewModel
@@ -15,8 +13,14 @@ import kotlin.properties.Delegates
 class MyApp : Application(), ViewModelStoreOwner {
 
     companion object {
-        var appContext: Context by Delegates.notNull()
+        var appContext: MyApp by Delegates.notNull()
     }
+
+    @Inject
+    lateinit var mBaseAppViewModel: BaseAppViewModel
+
+    @Inject
+    lateinit var mAppViewModel: AppViewModel
 
     override fun onCreate() {
         super.onCreate()

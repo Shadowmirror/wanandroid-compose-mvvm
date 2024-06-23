@@ -6,23 +6,19 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import miao.kmirror.wanandroid.MyApp
 import miao.kmirror.wanandroid.R
 import miao.kmirror.wanandroid.utils.LogUtil
 import miao.kmirror.wanandroid.utils.ToastUtil
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import javax.inject.Inject
 
 @AndroidEntryPoint
 open class BaseActivity: ComponentActivity() {
 
 
-    @Inject
-    lateinit var mBaseAppViewModel: BaseAppViewModel
 
-    @Inject
-    lateinit var mAppViewModel: AppViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +26,7 @@ open class BaseActivity: ComponentActivity() {
     }
 
     protected open fun startObserver(){
-        mBaseAppViewModel.apply {
+        MyApp.appContext.mBaseAppViewModel.apply {
             viewModelScope.launch {
                 exception.flowWithLifecycle(lifecycle).collect { e ->
                     LogUtil.e("网络请求错误：${e.message}")
