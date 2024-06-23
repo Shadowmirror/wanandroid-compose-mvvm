@@ -34,7 +34,7 @@ fun ProjectPage(
         }
     }
 
-    if (uiState.data.isNullOrEmpty()){
+    if (uiState.showLoading){
         Box(modifier = Modifier.fillMaxSize()){
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
@@ -63,7 +63,6 @@ fun ProjectPage(
                     }
                 }
             }
-
         }
     }
 

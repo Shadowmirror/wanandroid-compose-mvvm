@@ -33,7 +33,7 @@ fun HomePage(
             viewModel.getHomeArticlePageList(true)
         }
     }
-    if (uiState.data.isNullOrEmpty()) {
+    if (uiState.showLoading) {
         Box(modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
