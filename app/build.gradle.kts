@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
-    alias(libs.plugins.kotlin.hilt)
+//    alias(libs.plugins.kotlin.hilt)
     alias(libs.plugins.ktorfit)
 }
 
@@ -14,7 +14,6 @@ android {
     defaultConfig {
         applicationId = "miao.kmirror.wanndroid.compose"
         minSdk = 21
-        //noinspection EditedTargetSdkVersion
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -44,21 +43,23 @@ android {
 }
 
 dependencies {
+//    implementation(libs.hilt.android)
+//    implementation(libs.hilt.compiler)
+//    implementation(libs.hilt.navigation.compose)
 
-    implementation(libs.dagger.hilt.android)
-    ksp(libs.dagger.hilt.compiler)
 
 
-    implementation("de.jensklingenberg.ktorfit:ktorfit-lib-ktor-3.0.0:2.1.0")
-    implementation("de.jensklingenberg.ktorfit:ktorfit-converters-flow-ktor-3.0.0:2.1.0")
-    implementation("de.jensklingenberg.ktorfit:ktorfit-converters-call-ktor-3.0.0:2.1.0")
-    implementation("de.jensklingenberg.ktorfit:ktorfit-converters-response-ktor-3.0.0:2.1.0")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.ktorfit.ktor.lib)
+    implementation(libs.ktorfit.ktor.converters.call)
+    implementation(libs.ktorfit.ktor.converters.flow)
+    implementation(libs.ktorfit.ktor.converters.response)
 
     implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
-
-
+    implementation(libs.ktor.client.okhttp)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
