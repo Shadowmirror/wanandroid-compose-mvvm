@@ -3,7 +3,6 @@ package miao.kmirror.wanndroid.compose.viewmodel.main
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import miao.kmirror.wanndroid.compose.bean.Article
@@ -15,6 +14,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor() : ViewModel() {
     val bannerList = mutableStateListOf<Banner>()
     val articleList = mutableStateListOf<Article>()
+    private var curPage = 0
 
     @Inject
     lateinit var mWanAndroidApi: WanAndroidApi
@@ -33,7 +33,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     fun loadArticleBanner() {
         viewModelScope.launch {
-            articleList.addAll(mWanAndroidApi.getArticle().data.datas)
+            val responseData = mWanAndroidApi.getArticle(curPage)
+            curPage = responseData.data.curPage
+            articleList.addAll(responseData.data.datas)
         }
     }
 }

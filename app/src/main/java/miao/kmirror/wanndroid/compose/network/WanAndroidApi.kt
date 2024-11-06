@@ -1,6 +1,7 @@
 package miao.kmirror.wanndroid.compose.network
 
 import de.jensklingenberg.ktorfit.http.GET
+import de.jensklingenberg.ktorfit.http.Path
 import miao.kmirror.wanndroid.compose.bean.ApiResponse
 import miao.kmirror.wanndroid.compose.bean.Article
 import miao.kmirror.wanndroid.compose.bean.Banner
@@ -10,7 +11,7 @@ interface WanAndroidApi {
     @GET("banner/json")
     suspend fun getBanner(): ApiResponse<List<Banner>>
 
-    @GET("article/list/0/json")
-    suspend fun getArticle(): ApiResponse<PageResponse<Article>>
+    @GET("article/list/{curPage}/json")
+    suspend fun getArticle(@Path("curPage") curPage: Int = 0): ApiResponse<PageResponse<Article>>
 
 }
