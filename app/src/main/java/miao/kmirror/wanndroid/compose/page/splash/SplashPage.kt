@@ -25,7 +25,7 @@ import miao.kmirror.wanndroid.compose.page.NavSplash
 
 @Composable
 fun SplashPage(navHostController: NavHostController) {
-    var countdown by remember { mutableIntStateOf(5) }
+    var countdown by remember { mutableIntStateOf(3) }
     val current = LocalContext.current as MainActivity
     LaunchedEffect(Unit) {
         while (countdown > 0) {
