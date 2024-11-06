@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.hilt)
     alias(libs.plugins.ktorfit)
+    kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
 android {
@@ -48,11 +49,11 @@ android {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-
-
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
