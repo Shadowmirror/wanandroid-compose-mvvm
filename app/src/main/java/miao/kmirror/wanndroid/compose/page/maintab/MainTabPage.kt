@@ -24,36 +24,49 @@ import miao.kmirror.wanndroid.compose.page.main.MainPage
 import miao.kmirror.wanndroid.compose.page.square.SquarePage
 import miao.kmirror.wanndroid.compose.page.tree.TreePage
 
+
+val tabItems = arrayListOf(NavMain, NavTree, NavSquare)
+
 @Composable
 fun MainTabPage(
     navHostController: NavHostController,
 ) {
     val mainNavHostController = rememberNavController()
 
-
     Scaffold(
         bottomBar = {
             NavigationBar(modifier = Modifier.fillMaxWidth()) {
                 val navBackStackEntry by mainNavHostController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
-                NavigationBarItem(
-                    selected = currentDestination?.route == NavMain::class.qualifiedName,
-                    onClick = {
-                        mainNavHostController.navigate(route = NavMain)
-                    },
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Main") }
-                )
-
-                NavigationBarItem(
-                    selected = currentDestination?.route == NavTree::class.qualifiedName,
-                    onClick = { mainNavHostController.navigate(route = NavTree) },
-                    icon = { Icon(Icons.Default.Place, contentDescription = "Tree") }
-                )
-                NavigationBarItem(
-                    selected = currentDestination?.route == NavSquare::class.qualifiedName,
-                    onClick = { mainNavHostController.navigate(route = NavSquare) },
-                    icon = { Icon(Icons.Default.Notifications, contentDescription = "Square") }
-                )
+                tabItems.forEach { tabItem ->
+                    NavigationBarItem(
+                        selected = currentDestination?.route == tabItem::class.qualifiedName,
+                        onClick = {
+                            mainNavHostController.navigate(route = tabItem) {
+                                // 这里让多个Tab下返回时，不是回到首页，而是直接退出
+                                currentDestination?.id?.let {
+                                    popUpTo(it) {
+                                        // 跳转时保存页面状态
+                                        saveState = true
+                                        // 回退到栈顶时，栈顶页面是否也关闭
+                                        inclusive = true
+                                    }
+                                }
+                                // 栈顶复用，避免重复点击同一个导航按钮，回退栈中多次创建实例
+                                launchSingleTop = true
+                                // 回退时恢复页面状态
+                                restoreState = true
+                            }
+                        },
+                        icon = {
+                            when (tabItem) {
+                                NavMain -> Icon(Icons.Default.Home, contentDescription = null)
+                                NavTree -> Icon(Icons.Default.Place, contentDescription = null)
+                                NavSquare -> Icon(Icons.Default.Notifications, contentDescription = null)
+                            }
+                        }
+                    )
+                }
             }
         },
         modifier = Modifier
