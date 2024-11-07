@@ -1,14 +1,19 @@
 package miao.kmirror.wanndroid.compose
 
 import android.app.Application
-import android.util.Log
-import dagger.hilt.android.HiltAndroidApp
+import miao.kmirror.wanndroid.compose.di.AppModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
+import org.koin.ksp.generated.module
 
-
-@HiltAndroidApp
 class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        Log.i("Kmirror", "onCreate: MyApp")
+        startKoin{
+            androidLogger()
+            androidContext(this@MyApp)
+            modules(AppModule().module)
+        }
     }
 }

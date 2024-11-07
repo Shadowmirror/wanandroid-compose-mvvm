@@ -16,15 +16,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import kotlinx.coroutines.launch
 import miao.kmirror.wanndroid.compose.viewmodel.main.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainPage(
     navHostController: NavHostController,
-    mainViewModel: MainViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = koinViewModel()
 ) {
     val articleList by remember { derivedStateOf { mainViewModel.articleList } }
 

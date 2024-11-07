@@ -10,9 +10,11 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Single
 
-object WanAndroidApiService {
 
+@Single
+class WanAndroidApiService {
     private val ktorfit = Ktorfit.Builder()
         .baseUrl(NetworkConfig.BaseUrl)
         .httpClient(HttpClient(OkHttp) {
@@ -32,7 +34,8 @@ object WanAndroidApiService {
         )
         .build()
 
-    fun getWanAndroidApi(): WanAndroidApi {
-        return ktorfit.createWanAndroidApi()
+
+    val wanAndroidApi by lazy {
+        ktorfit.createWanAndroidApi()
     }
 }

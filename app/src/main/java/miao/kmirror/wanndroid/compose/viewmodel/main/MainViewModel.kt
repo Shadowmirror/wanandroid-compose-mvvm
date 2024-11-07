@@ -1,39 +1,42 @@
+
 package miao.kmirror.wanndroid.compose.viewmodel.main
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import miao.kmirror.wanndroid.compose.bean.Article
 import miao.kmirror.wanndroid.compose.bean.Banner
-import miao.kmirror.wanndroid.compose.network.WanAndroidApi
-import javax.inject.Inject
+import miao.kmirror.wanndroid.compose.network.WanAndroidApiService
+import org.koin.android.annotation.KoinViewModel
 
-@HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+
+
+@KoinViewModel
+class MainViewModel(
+    private val mWanAndroidApiService: WanAndroidApiService
+) : ViewModel() {
     val bannerList = mutableStateListOf<Banner>()
     val articleList = mutableStateListOf<Article>()
     private var curPage = 0
 
-    @Inject
-    lateinit var mWanAndroidApi: WanAndroidApi
     fun initData() {
         loadBanner()
         loadArticleBanner()
     }
 
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun loadBanner() {
         viewModelScope.launch {
-            bannerList.addAll(mWanAndroidApi.getBanner().data)
+            bannerList.addAll(mWanAndroidApiService.wanAndroidApi.getBanner().data)
         }
     }
 
 
     fun loadArticleBanner() {
         viewModelScope.launch {
-            val responseData = mWanAndroidApi.getArticle(curPage)
+            val responseData = mWanAndroidApiService.wanAndroidApi.getArticle(curPage)
             curPage = responseData.data.curPage
             articleList.addAll(responseData.data.datas)
         }

@@ -9,13 +9,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 import miao.kmirror.wanndroid.compose.page.main.MainPage
 import miao.kmirror.wanndroid.compose.page.splash.SplashPage
+import org.koin.androidx.compose.KoinAndroidContext
 
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navHostController: NavHostController
@@ -24,8 +23,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            navHostController = rememberNavController()
-            MainContent(navHostController = navHostController)
+            KoinAndroidContext {
+                navHostController = rememberNavController()
+                MainContent(navHostController = navHostController)
+            }
         }
     }
 }
