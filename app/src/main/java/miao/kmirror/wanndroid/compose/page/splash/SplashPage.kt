@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import miao.kmirror.wanndroid.compose.page.MainActivity
-import miao.kmirror.wanndroid.compose.page.NavMain
+import miao.kmirror.wanndroid.compose.page.NavMainTab
 import miao.kmirror.wanndroid.compose.page.NavSplash
 
 @Composable
@@ -36,7 +36,7 @@ fun SplashPage(navHostController: NavHostController) {
 
         }
         withContext(Dispatchers.Main) {
-            navHostController.navigate(route = NavMain) {
+            navHostController.navigate(route = NavMainTab) {
                 popUpTo(NavSplash) { inclusive = true }
             }
         }

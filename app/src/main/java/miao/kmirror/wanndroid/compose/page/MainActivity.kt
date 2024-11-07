@@ -10,7 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
-import miao.kmirror.wanndroid.compose.page.main.MainPage
+import miao.kmirror.wanndroid.compose.page.maintab.MainTabPage
+import miao.kmirror.wanndroid.compose.page.setting.SettingPage
 import miao.kmirror.wanndroid.compose.page.splash.SplashPage
 import org.koin.androidx.compose.KoinAndroidContext
 
@@ -43,8 +44,11 @@ fun MainContent(
         composable<NavSplash> {
             SplashPage(navHostController)
         }
-        composable<NavMain> {
-            MainPage(navHostController)
+        composable<NavMainTab> {
+            MainTabPage(navHostController)
+        }
+        composable<NavSetting> {
+            SettingPage(navHostController)
         }
     }
 }
@@ -54,7 +58,9 @@ fun MainContent(
 object NavSplash
 
 @Serializable
-object NavMain
+object NavMainTab
 
+@Serializable
+object NavSetting
 
 
