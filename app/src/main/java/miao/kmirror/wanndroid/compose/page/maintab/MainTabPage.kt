@@ -81,7 +81,7 @@ fun MainTabPage(
                 MainPage(navHostController)
             }
             composable<NavTree> {
-                TreePage(navHostController)
+                TreePage()
             }
             composable<NavSquare> {
                 SquarePage(navHostController)
