@@ -63,9 +63,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.ktorfit.ktor.lib)
-    implementation(libs.ktorfit.ktor.converters.call)
-    implementation(libs.ktorfit.ktor.converters.flow)
-    implementation(libs.ktorfit.ktor.converters.response)
+    implementation (libs.ktor.client.logging)
+//    implementation(libs.ktorfit.ktor.converters.call)
+//    implementation(libs.ktorfit.ktor.converters.flow)
+//    implementation(libs.ktorfit.ktor.converters.response)
 
     implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.client.content.negotiation)

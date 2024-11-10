@@ -13,6 +13,7 @@ import kotlinx.serialization.Serializable
 import miao.kmirror.wanndroid.compose.page.maintab.MainTabPage
 import miao.kmirror.wanndroid.compose.page.setting.SettingPage
 import miao.kmirror.wanndroid.compose.page.splash.SplashPage
+import miao.kmirror.wanndroid.compose.ui.theme.WanAndroidComposeTheme
 import org.koin.androidx.compose.KoinAndroidContext
 
 
@@ -25,8 +26,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KoinAndroidContext {
-                navHostController = rememberNavController()
-                MainContent(navHostController = navHostController)
+                WanAndroidComposeTheme {
+                    navHostController = rememberNavController()
+                    MainContent(navHostController = navHostController)
+                }
             }
         }
     }

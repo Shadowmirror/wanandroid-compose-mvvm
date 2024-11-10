@@ -3,6 +3,7 @@ package miao.kmirror.wanndroid.compose.bean
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import miao.kmirror.wanndroid.compose.utils.toObject
 
 @Serializable
 data class Article(
@@ -76,4 +77,52 @@ data class Article(
     val visible: Int,
     @SerialName("zan")
     val zan: Int
-)
+) {
+    companion object {
+        private var sampleObject: Article? = null
+        fun getSampleObject(): Article {
+            if (sampleObject == null) {
+                sampleObject = """
+                    {
+                        "adminAdd": false,
+                        "apkLink": "",
+                        "audit": 1,
+                        "author": "",
+                        "canEdit": false,
+                        "chapterId": 502,
+                        "chapterName": "自助",
+                        "collect": false,
+                        "courseId": 13,
+                        "desc": "",
+                        "descMd": "",
+                        "envelopePic": "",
+                        "fresh": false,
+                        "host": "",
+                        "id": 29081,
+                        "isAdminAdd": false,
+                        "link": "https://blog.csdn.net/qq_40533422/article/details/143236377",
+                        "niceDate": "2024-10-25 16:13",
+                        "niceShareDate": "2024-10-25 16:13",
+                        "origin": "",
+                        "prefix": "",
+                        "projectLink": "",
+                        "publishTime": 1729844022000,
+                        "realSuperChapterId": 493,
+                        "selfVisible": 0,
+                        "shareDate": 1729844022000,
+                        "shareUser": "JasonYin",
+                        "superChapterId": 494,
+                        "superChapterName": "广场Tab",
+                        "tags": [],
+                        "title": "《探索 HarmonyOS NEXT(5.0)：开启构建模块化项目架构奇幻之旅 &mdash;&mdash; 构建基础特性层》",
+                        "type": 0,
+                        "userId": 9296,
+                        "visible": 1,
+                        "zan": 0
+                    }
+                """.toObject<Article>()
+            }
+            return sampleObject!!
+        }
+    }
+}
