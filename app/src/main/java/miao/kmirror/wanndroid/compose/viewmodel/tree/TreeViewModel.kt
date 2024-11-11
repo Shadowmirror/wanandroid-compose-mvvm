@@ -1,10 +1,8 @@
 package miao.kmirror.wanndroid.compose.viewmodel.tree
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 
@@ -14,37 +12,9 @@ class TreeViewModel : ViewModel() {
     private val _pageState = MutableStateFlow(false)
     val pageState: StateFlow<Boolean> = _pageState
 
-    // 父目录的索引
-    private val _parentDirIndex = MutableStateFlow(0)
-    val parentDirIndex: StateFlow<Int> = _parentDirIndex
-
-    // 子目录的索引列表
-    private val _childDirIndexList = MutableStateFlow<List<Int>>(emptyList())
-    val childDirIndexList: StateFlow<List<Int>> = _childDirIndexList
 
     fun initializeData() {
-        viewModelScope.launch {
-            _pageState.value = true
-            // 初始化父目录索引
-            _parentDirIndex.value = 0
 
-            // 初始化子目录索引列表
-            val initialChildDirIndexList = ParentDir.testData.map { 0 }
-            _childDirIndexList.value = initialChildDirIndexList
-            _pageState.value = true
-        }
-    }
-
-    // 更新父目录索引
-    fun updateParentDirIndex(newIndex: Int) {
-        _parentDirIndex.value = newIndex
-    }
-
-    // 更新子目录索引
-    fun updateChildDirIndex(parentIndex: Int, newIndex: Int) {
-        val updatedList = _childDirIndexList.value.toMutableList()
-        updatedList[parentIndex] = newIndex
-        _childDirIndexList.value = updatedList
     }
 }
 
