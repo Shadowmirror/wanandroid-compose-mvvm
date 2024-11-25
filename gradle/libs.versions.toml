@@ -1,23 +1,21 @@
 [versions]
 agp = "8.7.2"
-#noinspection GradleDependency
-kotlin = "2.0.20"
+kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 kotlinxSerializationJson = "1.7.3"
-ktor = "3.0.0"
+ktor = "3.0.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
-#noinspection GradleDependency
-composeBom = "2024.04.01"
-kspVersion = "2.0.20-1.0.24"
-ktorfit = "2.1.0"
-navigation-compose = "2.8.3"
+composeBom = "2024.11.00"
+kspVersion = "2.0.21-1.0.28"
+ktorfit = "2.2.0"
+navigation-compose = "2.8.4"
 
-koin = "4.0.0"
-koin-annotations = "2.0.0-Beta1"
+koin = "4.0.1-Beta1"
+koin-annotations = "2.0.0-Beta2"
 
 
 [libraries]
@@ -47,10 +45,10 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 
-ktorfit-ktor-lib = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib-ktor-3.0.0", version.ref = "ktorfit" }
-ktorfit-ktor-converters-flow = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-flow-ktor-3.0.0", version.ref = "ktorfit" }
-ktorfit-ktor-converters-call = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-call-ktor-3.0.0", version.ref = "ktorfit" }
-ktorfit-ktor-converters-response = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-response-ktor-3.0.0", version.ref = "ktorfit" }
+ktorfit-ktor-lib = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-lib", version.ref = "ktorfit" }
+#ktorfit-ktor-converters-flow = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-flow", version.ref = "ktorfit" }
+#ktorfit-ktor-converters-call = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-call", version.ref = "ktorfit" }
+#ktorfit-ktor-converters-response = { group = "de.jensklingenberg.ktorfit", name = "ktorfit-converters-response", version.ref = "ktorfit" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-annotations" }
