@@ -58,7 +58,7 @@ data class Article(
     @SerialName("selfVisible")
     val selfVisible: Int,
     @SerialName("shareDate")
-    val shareDate: Long,
+    val shareDate: Long?,
     @SerialName("shareUser")
     val shareUser: String,
     @SerialName("superChapterId")

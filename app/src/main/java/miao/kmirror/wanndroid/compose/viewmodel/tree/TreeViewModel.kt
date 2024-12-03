@@ -1,136 +1,43 @@
 package miao.kmirror.wanndroid.compose.viewmodel.tree
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import miao.kmirror.wanndroid.compose.bean.TreeBean
+import miao.kmirror.wanndroid.compose.network.WanAndroidApiService
 import org.koin.android.annotation.KoinViewModel
 
 
 @KoinViewModel
-class TreeViewModel : ViewModel() {
+class TreeViewModel(private val mWanAndroidApiService: WanAndroidApiService) : ViewModel() {
 
     private val _pageState = MutableStateFlow(false)
     val pageState: StateFlow<Boolean> = _pageState
 
+    val treeBeanList = mutableStateListOf<TreeBean>()
 
-    fun initializeData() {
 
+    fun initData() {
+        viewModelScope.launch {
+            _pageState.value = false
+
+            withContext(Dispatchers.IO) {
+                getTreeBean()
+            }
+
+
+            _pageState.value = true
+        }
+    }
+
+    private suspend fun getTreeBean() {
+        treeBeanList.clear()
+        treeBeanList.addAll(mWanAndroidApiService.wanAndroidApi.getTreeBean().data)
     }
 }
 
-data class ParentDir(val desc: String, val childDirList: List<ChildDir>) {
-    data class ChildDir(val desc: String)
-
-    companion object {
-        val testData = arrayListOf(
-            ParentDir(
-                "A", arrayListOf(
-                    ChildDir("A1"),
-                    ChildDir("A2"),
-                    ChildDir("A3"),
-                    ChildDir("A4"),
-                    ChildDir("A5"),
-                    ChildDir("A6"),
-                    ChildDir("A7"),
-                    ChildDir("A8"),
-                )
-            ),
-            ParentDir(
-                "B", arrayListOf(
-                    ChildDir("B1"),
-                    ChildDir("B2"),
-                    ChildDir("B3"),
-                    ChildDir("B4"),
-                    ChildDir("B5"),
-                    ChildDir("B6"),
-                    ChildDir("B7"),
-                    ChildDir("B8"),
-                )
-            ),
-            ParentDir(
-                "C", arrayListOf(
-                    ChildDir("C1"),
-                    ChildDir("C2"),
-                    ChildDir("C3"),
-                    ChildDir("C4"),
-                    ChildDir("C5"),
-                    ChildDir("C6"),
-                    ChildDir("C7"),
-                    ChildDir("C8"),
-                )
-            ),
-            ParentDir(
-                "D", arrayListOf(
-                    ChildDir("D1"),
-                    ChildDir("D2"),
-                    ChildDir("D3"),
-                    ChildDir("D4"),
-                    ChildDir("D5"),
-                    ChildDir("D6"),
-                    ChildDir("D7"),
-                    ChildDir("D8"),
-                )
-            ),
-            ParentDir(
-                "E", arrayListOf(
-                    ChildDir("E1"),
-                    ChildDir("E2"),
-                    ChildDir("E3"),
-                    ChildDir("E4"),
-                    ChildDir("E5"),
-                    ChildDir("E6"),
-                    ChildDir("E7"),
-                    ChildDir("E8"),
-                )
-            ),
-            ParentDir(
-                "F", arrayListOf(
-                    ChildDir("F1"),
-                    ChildDir("F2"),
-                    ChildDir("F3"),
-                    ChildDir("F4"),
-                    ChildDir("F5"),
-                    ChildDir("F6"),
-                    ChildDir("F7"),
-                    ChildDir("F8"),
-                )
-            ),
-            ParentDir(
-                "G", arrayListOf(
-                    ChildDir("G1"),
-                    ChildDir("G2"),
-                    ChildDir("G3"),
-                    ChildDir("G4"),
-                    ChildDir("G5"),
-                    ChildDir("G6"),
-                    ChildDir("G7"),
-                    ChildDir("G8"),
-                )
-            ),
-            ParentDir(
-                "H", arrayListOf(
-                    ChildDir("H1"),
-                    ChildDir("H2"),
-                    ChildDir("H3"),
-                    ChildDir("H4"),
-                    ChildDir("H5"),
-                    ChildDir("H6"),
-                    ChildDir("H7"),
-                    ChildDir("H8"),
-                )
-            ),
-            ParentDir(
-                "I", arrayListOf(
-                    ChildDir("I1"),
-                    ChildDir("I2"),
-                    ChildDir("I3"),
-                    ChildDir("I4"),
-                    ChildDir("I5"),
-                    ChildDir("I6"),
-                    ChildDir("I7"),
-                    ChildDir("I8"),
-                )
-            )
-        )
-    }
-}

@@ -16,25 +16,24 @@ import org.koin.android.annotation.KoinViewModel
 class MainViewModel(
     private val mWanAndroidApiService: WanAndroidApiService
 ) : ViewModel() {
-    val bannerList = mutableStateListOf<Banner>()
+    private val bannerList = mutableStateListOf<Banner>()
     val articleList = mutableStateListOf<Article>()
     private var curPage = 0
 
     fun initData() {
         loadBanner()
-        loadArticleBanner()
+        loadArticle()
     }
 
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    fun loadBanner() {
+    private fun loadBanner() {
         viewModelScope.launch {
             bannerList.addAll(mWanAndroidApiService.wanAndroidApi.getBanner().data)
         }
     }
 
 
-    fun loadArticleBanner() {
+    fun loadArticle() {
         viewModelScope.launch {
             val responseData = mWanAndroidApiService.wanAndroidApi.getArticle(curPage)
             curPage = responseData.data.curPage
