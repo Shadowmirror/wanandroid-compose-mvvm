@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.annotations)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.androidx.webkit)
     ksp(libs.koin.ksp)
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)

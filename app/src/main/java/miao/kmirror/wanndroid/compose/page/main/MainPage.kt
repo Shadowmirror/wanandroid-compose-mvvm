@@ -11,12 +11,13 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import miao.kmirror.wanndroid.compose.viewmodel.main.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainPage(
-//    navHostController: NavHostController,
+    navHostController: NavHostController,
     mainViewModel: MainViewModel = koinViewModel()
 ) {
     val articleList by remember { derivedStateOf { mainViewModel.articleList } }
