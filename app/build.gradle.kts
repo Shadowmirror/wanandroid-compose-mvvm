@@ -56,6 +56,9 @@ android {
 dependencies {
     implementation(libs.kotlinx.serialization.json)
 
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.ktor3)
+
     implementation(libs.koin.android)
     implementation(libs.koin.annotations)
     implementation(libs.koin.androidx.compose)
