@@ -1,4 +1,3 @@
-
 package miao.kmirror.wanndroid.compose.viewmodel.main
 
 import androidx.compose.runtime.mutableStateListOf
@@ -11,12 +10,11 @@ import miao.kmirror.wanndroid.compose.network.WanAndroidApiService
 import org.koin.android.annotation.KoinViewModel
 
 
-
 @KoinViewModel
 class MainViewModel(
     private val mWanAndroidApiService: WanAndroidApiService
 ) : ViewModel() {
-    private val bannerList = mutableStateListOf<Banner>()
+    val bannerList = mutableStateListOf<Banner>()
     val articleList = mutableStateListOf<Article>()
     private var curPage = 0
 
