@@ -1,0 +1,32 @@
+-- User.sq
+
+CREATE TABLE User (
+    userId INTEGER NOT NULL,
+    userName TEXT NOT NULL,
+    userDatabaseId TEXT PRIMARY KEY NOT NULL
+);
+
+-- 插入用户
+insertUser:
+INSERT INTO User (userId, userName, userDatabaseId)
+VALUES ?;
+
+-- 根据 userDatabaseId 查询用户
+getUserByDatabaseId:
+SELECT * FROM User
+WHERE userDatabaseId = ?;
+
+-- 删除用户
+deleteUser:
+DELETE FROM User
+WHERE userDatabaseId = ?;
+
+-- 删除最后一个用户
+deleteLastUser:
+DELETE FROM User
+ORDER BY userId DESC
+LIMIT 1;
+
+-- 查询所有用户
+queryAllUsers:
+SELECT * FROM User;

@@ -21,11 +21,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import miao.kmirror.wanndroid.compose.page.main.MainPage
-import miao.kmirror.wanndroid.compose.page.square.SquarePage
+import miao.kmirror.wanndroid.compose.page.test.TestPage
 import miao.kmirror.wanndroid.compose.page.tree.TreePage
 
 
-val tabItems = arrayListOf(NavMain, NavTree, NavSquare)
+val tabItems = arrayListOf(NavMain, NavTree, NavTest)
 
 @Composable
 fun MainTabPage(
@@ -62,7 +62,7 @@ fun MainTabPage(
                             when (tabItem) {
                                 NavMain -> Icon(Icons.Default.Home, contentDescription = null)
                                 NavTree -> Icon(Icons.Default.Place, contentDescription = null)
-                                NavSquare -> Icon(Icons.Default.Notifications, contentDescription = null)
+                                NavTest -> Icon(Icons.Default.Notifications, contentDescription = null)
                             }
                         }
                     )
@@ -83,8 +83,8 @@ fun MainTabPage(
             composable<NavTree> {
                 TreePage()
             }
-            composable<NavSquare> {
-                SquarePage(navHostController)
+            composable<NavTest> {
+                TestPage(navHostController)
             }
         }
     }
@@ -99,3 +99,6 @@ object NavSquare
 
 @Serializable
 object NavTree
+
+@Serializable
+object NavTest

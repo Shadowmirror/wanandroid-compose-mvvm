@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.sqlidelight)
     kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
@@ -48,12 +49,17 @@ android {
 
     // Compile time check
     ksp {
-        arg("KOIN_CONFIG_CHECK","true")
-        arg("KOIN_USE_COMPOSE_VIEWMODEL","true")
+        arg("KOIN_CONFIG_CHECK", "true")
+        arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
     }
 }
 
 dependencies {
+
+    implementation(libs.ulid.kotlin)
+
+    implementation(libs.sqldelight.android)
+
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.coil.compose)
@@ -68,7 +74,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.ktorfit.ktor.lib)
-    implementation (libs.ktor.client.logging)
+    implementation(libs.ktor.client.logging)
 //    implementation(libs.ktorfit.ktor.converters.call)
 //    implementation(libs.ktorfit.ktor.converters.flow)
 //    implementation(libs.ktorfit.ktor.converters.response)
@@ -94,3 +100,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("miao.kmirror.wanndroid.compose")
+        }
+    }
+}
+
+
