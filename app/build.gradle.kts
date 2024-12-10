@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.ktorfit)
-    alias(libs.plugins.sqlidelight)
+    alias(libs.plugins.room)
     kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
@@ -52,13 +52,19 @@ android {
         arg("KOIN_CONFIG_CHECK", "true")
         arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
+    }
 }
 
 dependencies {
 
-    implementation(libs.ulid.kotlin)
+    implementation(libs.room.runtime.android)
+    ksp(libs.room.compiler)
 
-    implementation(libs.sqldelight.android)
+    implementation(libs.ulid.kotlin)
 
     implementation(libs.kotlinx.serialization.json)
 
@@ -100,14 +106,3 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
-
-
-sqldelight {
-    databases {
-        create("Database") {
-            packageName.set("miao.kmirror.wanndroid.compose")
-        }
-    }
-}
-
-

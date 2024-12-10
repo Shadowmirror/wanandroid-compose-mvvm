@@ -1,8 +1,6 @@
 package miao.kmirror.wanndroid.compose.page.webview
 
-import android.os.Build
 import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
@@ -39,15 +37,6 @@ fun SampleWebView(url: String) {
 
                 if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
                     WebSettingsCompat.setAlgorithmicDarkeningAllowed(this.settings, true);
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    settings.forceDark = WebSettings.FORCE_DARK_ON
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    isForceDarkAllowed = true
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    settings.setAlgorithmicDarkeningAllowed(true)
                 }
 
                 // 设置 WebViewClient 以防止外部浏览器打开链接
