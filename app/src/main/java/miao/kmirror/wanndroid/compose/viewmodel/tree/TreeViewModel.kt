@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import miao.kmirror.wanndroid.compose.bean.TreeBean
-import miao.kmirror.wanndroid.compose.network.WanAndroidApiService
+import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import org.koin.android.annotation.KoinViewModel
 
 
 @KoinViewModel
-class TreeViewModel(private val mWanAndroidApiService: WanAndroidApiService) : ViewModel() {
+class TreeViewModel(private val wanAndroidRepository: WanAndroidRepository) : ViewModel() {
 
     private val _pageState = MutableStateFlow(false)
     val pageState: StateFlow<Boolean> = _pageState
@@ -37,7 +37,7 @@ class TreeViewModel(private val mWanAndroidApiService: WanAndroidApiService) : V
 
     private suspend fun getTreeBean() {
         treeBeanList.clear()
-        treeBeanList.addAll(mWanAndroidApiService.wanAndroidApi.getTreeBean().data)
+        treeBeanList.addAll(wanAndroidRepository.getTreeBean().data)
     }
 }
 

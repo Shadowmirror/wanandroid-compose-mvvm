@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import miao.kmirror.wanndroid.compose.bean.Article
-import miao.kmirror.wanndroid.compose.network.WanAndroidApiService
+import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-class TreeDetailViewModel(private val mWanAndroidApiService: WanAndroidApiService) : ViewModel() {
+class TreeDetailViewModel(private val wanAndroidRepository: WanAndroidRepository) : ViewModel() {
 
     val treeDetailMap: MutableMap<Int, TreeDetailBean> = mutableMapOf()
     private val _pageState = MutableStateFlow(false)
@@ -37,7 +37,7 @@ class TreeDetailViewModel(private val mWanAndroidApiService: WanAndroidApiServic
         viewModelScope.launch {
             treeDetailMap[cid]?.apply {
                 if (!noMore) {
-                    val responseData = mWanAndroidApiService.wanAndroidApi.getArticle(treeDetailMap[cid]!!.currentPage, cid)
+                    val responseData = wanAndroidRepository.getArticle(treeDetailMap[cid]!!.currentPage, cid)
                     currentPage = responseData.data.curPage
                     articleList.addAll(responseData.data.datas)
                     if (responseData.data.datas.size < 20) {
