@@ -27,13 +27,17 @@ class CustomCookiesStorage(private val cookieRepository: CookieRepository) : Coo
                 // 过期了, 就要清除 Cookie 数据
                 cookie.expires?.apply {
                     if (TimeUtil.getNetworkTime() >= timestamp) {
-                        cookies.clear()
-                        cookieRepository.deleteAllCookies()
+                        clearCookies()
                         return emptyList()
                     }
                 }
             }
         }
         return cookies
+    }
+
+    suspend fun clearCookies() {
+        cookies.clear()
+        cookieRepository.deleteAllCookies()
     }
 }

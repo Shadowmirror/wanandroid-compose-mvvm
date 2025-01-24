@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Place
@@ -21,11 +22,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import miao.kmirror.wanndroid.compose.page.main.MainPage
+import miao.kmirror.wanndroid.compose.page.mine.MinePage
 import miao.kmirror.wanndroid.compose.page.test.TestPage
 import miao.kmirror.wanndroid.compose.page.tree.TreePage
 
 
-val tabItems = arrayListOf(NavMain, NavTree, NavTest)
+val tabItems = arrayListOf(NavMain, NavTree, NavMine)
 
 @Composable
 fun MainTabPage(
@@ -62,7 +64,7 @@ fun MainTabPage(
                             when (tabItem) {
                                 NavMain -> Icon(Icons.Default.Home, contentDescription = null)
                                 NavTree -> Icon(Icons.Default.Place, contentDescription = null)
-                                NavTest -> Icon(Icons.Default.Notifications, contentDescription = null)
+                                NavMine -> Icon(Icons.Default.AccountCircle, contentDescription = null)
                             }
                         }
                     )
@@ -83,8 +85,8 @@ fun MainTabPage(
             composable<NavTree> {
                 TreePage()
             }
-            composable<NavTest> {
-                TestPage(navHostController)
+            composable<NavMine> {
+                MinePage(navHostController)
             }
         }
     }
@@ -102,3 +104,6 @@ object NavTree
 
 @Serializable
 object NavTest
+
+@Serializable
+object NavMine

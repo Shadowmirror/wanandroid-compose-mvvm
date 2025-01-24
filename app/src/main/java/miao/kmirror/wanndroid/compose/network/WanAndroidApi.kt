@@ -33,7 +33,7 @@ interface WanAndroidApi {
      * */
     @POST("user/login")
     @FormUrlEncoded
-    suspend fun login(@Field("username") username: String, @Field("password") password: String): ApiResponse<LoginBean>
+    suspend fun login(@Field("username") username: String, @Field("password") password: String): ApiResponse<LoginBean?>
 
     /**
      * 获取积分

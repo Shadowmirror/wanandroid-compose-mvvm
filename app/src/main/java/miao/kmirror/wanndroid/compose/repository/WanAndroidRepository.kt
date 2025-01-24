@@ -32,7 +32,7 @@ class WanAndroidRepository(
         return wanAndroidApiService.wanAndroidApi.getTreeBean()
     }
 
-    suspend fun login(username: String, password: String): ApiResponse<LoginBean> {
+    suspend fun login(username: String, password: String): ApiResponse<LoginBean?> {
         return wanAndroidApiService.wanAndroidApi.login(username, password)
     }
 
