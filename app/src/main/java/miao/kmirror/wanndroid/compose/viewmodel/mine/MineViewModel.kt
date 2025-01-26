@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import miao.kmirror.wanndroid.compose.MyApp
 import miao.kmirror.wanndroid.compose.database.WanAndroidDbService
+import miao.kmirror.wanndroid.compose.database.entity.UserCustomEntity
 import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import miao.kmirror.wanndroid.compose.utils.toPrettyJson
 import org.koin.android.annotation.KoinViewModel
@@ -26,9 +27,9 @@ class MineViewModel(private val wanAndroidRepository: WanAndroidRepository) : Vi
         } else {
             viewModelScope.launch {
                 val login = wanAndroidRepository.login(username.value, password.value, false)
-                if (login.id == WanAndroidDbService.GUEST_ID){
+                if (login.id == WanAndroidDbService.GUEST_ID) {
                     Toast.makeText(MyApp.getInstance(), "游客状态", Toast.LENGTH_SHORT).show()
-                }else{
+                } else {
                     Toast.makeText(MyApp.getInstance(), "登录成功", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -39,6 +40,13 @@ class MineViewModel(private val wanAndroidRepository: WanAndroidRepository) : Vi
         viewModelScope.launch {
             val coin = wanAndroidRepository.getCoin()
             Log.i("KmirrorTag", "login: ${coin.toPrettyJson()}")
+        }
+    }
+
+    fun addUserCustom() {
+        viewModelScope.launch {
+            val time = System.currentTimeMillis()
+            wanAndroidRepository.addUserCustomEntity(UserCustomEntity(time.toString(), time.toString()))
         }
     }
 

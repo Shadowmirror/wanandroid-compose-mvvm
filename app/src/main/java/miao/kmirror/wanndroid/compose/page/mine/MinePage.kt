@@ -108,15 +108,13 @@ fun MinePage(
 
                 Button(
                     onClick = {
-
+                        mineViewModel.addUserCustom()
                     },
                     shape = RoundedCornerShape(10.dp),
                     modifier = Modifier.weight(1f)
                 ) {
                     Text("注册")
                 }
-
-
             }
         }
 

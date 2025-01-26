@@ -2,6 +2,7 @@ package miao.kmirror.wanndroid.compose.repository
 
 import android.app.Application
 import miao.kmirror.wanndroid.compose.database.WanAndroidDbService
+import miao.kmirror.wanndroid.compose.database.entity.UserCustomEntity
 import miao.kmirror.wanndroid.compose.database.entity.UserInfoEntity
 import miao.kmirror.wanndroid.compose.network.WanAndroidApiService
 import miao.kmirror.wanndroid.compose.network.bean.ApiResponse
@@ -18,8 +19,6 @@ class WanAndroidRepository(
     private val wanAndroidApiService: WanAndroidApiService,
     private val wanAndroidDbService: WanAndroidDbService,
 ) {
-
-
     private var mCurrentUser: UserInfoEntity = UserInfoEntity()
 
 
@@ -91,12 +90,12 @@ class WanAndroidRepository(
                     isCurrentUser = true,
                 )
                 wanAndroidDbService.publicDatabase.userInfoDao().insertOrReplace(currentUser)
-                //
             } else {
                 currentUser = wanAndroidDbService.publicDatabase.userInfoDao().getById(WanAndroidDbService.GUEST_ID) ?: UserInfoEntity().apply { isCurrentUser = true }
             }
         }
         mCurrentUser = currentUser
+        wanAndroidDbService.publicDatabase.userInfoDao().login(mCurrentUser.id)
         wanAndroidDbService.switchUserDatabase(mCurrentUser.id.toString())
         return mCurrentUser
     }
@@ -104,6 +103,11 @@ class WanAndroidRepository(
 
     suspend fun getCoin(): ApiResponse<CoinInfoDTO> {
         return wanAndroidApiService.wanAndroidApi.getCoin()
+    }
+
+
+    suspend fun addUserCustomEntity(userCustomEntity: UserCustomEntity) {
+        return wanAndroidDbService.getCurrentUserDatabase().userCustomDao().insert(userCustomEntity)
     }
 
 }

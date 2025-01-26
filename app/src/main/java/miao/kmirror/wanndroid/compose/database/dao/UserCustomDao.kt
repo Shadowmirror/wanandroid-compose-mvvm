@@ -7,7 +7,7 @@ import miao.kmirror.wanndroid.compose.database.entity.UserCustomEntity
 interface UserCustomDao {
 
     // 插入数据
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(userCustomEntity: UserCustomEntity)
 
     // 根据 key 查询数据
@@ -17,10 +17,6 @@ interface UserCustomDao {
     // 查询所有数据
     @Query("SELECT * FROM UserCustomEntity")
     suspend fun getAll(): List<UserCustomEntity>
-
-    // 更新数据
-    @Update
-    suspend fun update(userCustomEntity: UserCustomEntity)
 
     // 删除数据
     @Delete

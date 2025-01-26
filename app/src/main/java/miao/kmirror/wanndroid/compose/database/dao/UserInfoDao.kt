@@ -74,4 +74,21 @@ interface UserInfoDao {
     )
     suspend fun logout(id: Long)
 
+
+    /**
+     * 用户登录
+     * */
+    @Query(
+        """
+        UPDATE UserInfoEntity 
+        SET isCurrentUser = CASE 
+            WHEN id = :id THEN 1 
+            WHEN id = -1 THEN 0 
+            ELSE isCurrentUser 
+        END
+        WHERE id = :id OR id = -1
+        """
+    )
+    suspend fun login(id: Long)
+
 }
