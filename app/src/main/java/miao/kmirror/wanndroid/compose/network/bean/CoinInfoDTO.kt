@@ -1,11 +1,11 @@
-package miao.kmirror.wanndroid.compose.bean
+package miao.kmirror.wanndroid.compose.network.bean
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CoinBean(
+data class CoinInfoDTO(
     @SerialName("coinCount")
     val coinCount: Int,
     @SerialName("level")

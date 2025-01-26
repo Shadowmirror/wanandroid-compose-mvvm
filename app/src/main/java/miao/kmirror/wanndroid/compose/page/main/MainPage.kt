@@ -33,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil3.compose.SubcomposeAsyncImage
@@ -49,7 +48,7 @@ fun MainPage(
     navHostController: NavHostController,
     mainViewModel: MainViewModel = koinViewModel()
 ) {
-    val articleList by remember { derivedStateOf { mainViewModel.articleList } }
+    val articleList by remember { derivedStateOf { mainViewModel.articleDTOList } }
     val listState = rememberLazyListState()
 
 
@@ -82,7 +81,7 @@ fun MainPage(
 
 @Composable
 fun CustomBanner(mainViewModel: MainViewModel = koinViewModel()) {
-    val bannerList by remember { derivedStateOf { mainViewModel.bannerList } }
+    val bannerList by remember { derivedStateOf { mainViewModel.bannerDTOList } }
     var showDialog by remember { mutableStateOf(false) }
 
     if (bannerList.isNotEmpty()) {

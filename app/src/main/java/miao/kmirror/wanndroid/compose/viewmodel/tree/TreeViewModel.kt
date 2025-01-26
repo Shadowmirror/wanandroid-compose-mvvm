@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import miao.kmirror.wanndroid.compose.bean.TreeBean
+import miao.kmirror.wanndroid.compose.network.bean.TreeDTO
 import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import org.koin.android.annotation.KoinViewModel
 
@@ -19,7 +19,7 @@ class TreeViewModel(private val wanAndroidRepository: WanAndroidRepository) : Vi
     private val _pageState = MutableStateFlow(false)
     val pageState: StateFlow<Boolean> = _pageState
 
-    val treeBeanList = mutableStateListOf<TreeBean>()
+    val treeDTOList = mutableStateListOf<TreeDTO>()
 
 
     fun initData() {
@@ -36,8 +36,8 @@ class TreeViewModel(private val wanAndroidRepository: WanAndroidRepository) : Vi
     }
 
     private suspend fun getTreeBean() {
-        treeBeanList.clear()
-        treeBeanList.addAll(wanAndroidRepository.getTreeBean().data)
+        treeDTOList.clear()
+        treeDTOList.addAll(wanAndroidRepository.getTreeBean().data)
     }
 }
 

@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import miao.kmirror.wanndroid.compose.bean.Article
+import miao.kmirror.wanndroid.compose.network.bean.ArticleDTO
 import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import org.koin.android.annotation.KoinViewModel
 
@@ -39,7 +39,7 @@ class TreeDetailViewModel(private val wanAndroidRepository: WanAndroidRepository
                 if (!noMore) {
                     val responseData = wanAndroidRepository.getArticle(treeDetailMap[cid]!!.currentPage, cid)
                     currentPage = responseData.data.curPage
-                    articleList.addAll(responseData.data.datas)
+                    articleDTOList.addAll(responseData.data.datas)
                     if (responseData.data.datas.size < 20) {
                         noMore = true
                     }
@@ -50,6 +50,6 @@ class TreeDetailViewModel(private val wanAndroidRepository: WanAndroidRepository
         }
     }
 
-    class TreeDetailBean(var currentPage: Int, var articleList: SnapshotStateList<Article>, var lazyListState: LazyListState, var noMore: Boolean = false)
+    class TreeDetailBean(var currentPage: Int, var articleDTOList: SnapshotStateList<ArticleDTO>, var lazyListState: LazyListState, var noMore: Boolean = false)
 
 }

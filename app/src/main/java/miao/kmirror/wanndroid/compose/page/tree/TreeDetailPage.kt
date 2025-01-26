@@ -35,9 +35,9 @@ fun TreeDetailPage(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                itemsIndexed(articleList) { index, item ->
+                itemsIndexed(articleDTOList) { index, item ->
                     CardItem(item)
-                    if (index == articleList.size - 5) {
+                    if (index == articleDTOList.size - 5) {
                         LaunchedEffect(Unit) {
                             treeDetailViewModel.loadArticle()
                         }

@@ -1,4 +1,4 @@
-package miao.kmirror.wanndroid.compose.bean
+package miao.kmirror.wanndroid.compose.network.bean
 
 
 import kotlinx.serialization.SerialName
@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 import miao.kmirror.wanndroid.compose.utils.toObject
 
 @Serializable
-data class Article(
+data class ArticleDTO(
     @SerialName("adminAdd")
     val adminAdd: Boolean = false,
 
@@ -95,7 +95,7 @@ data class Article(
     val superChapterName: String = "",
 
     @SerialName("tags")
-    val tags: List<Tag> = emptyList(),
+    val tagDTOS: List<TagDTO> = emptyList(),
 
     @SerialName("title")
     val title: String = "",
@@ -113,8 +113,8 @@ data class Article(
     val zan: Int = 0
 ) {
     companion object {
-        private var sampleObject: Article? = null
-        fun getSampleObject(): Article {
+        private var sampleObject: ArticleDTO? = null
+        fun getSampleObject(): ArticleDTO {
             if (sampleObject == null) {
                 sampleObject = """
                     {
@@ -154,7 +154,7 @@ data class Article(
                         "visible": 1,
                         "zan": 0
                     }
-                """.toObject<Article>()
+                """.toObject<ArticleDTO>()
             }
             return sampleObject!!
         }

@@ -6,26 +6,26 @@ import de.jensklingenberg.ktorfit.http.GET
 import de.jensklingenberg.ktorfit.http.POST
 import de.jensklingenberg.ktorfit.http.Path
 import de.jensklingenberg.ktorfit.http.Query
-import miao.kmirror.wanndroid.compose.bean.ApiResponse
-import miao.kmirror.wanndroid.compose.bean.Article
-import miao.kmirror.wanndroid.compose.bean.Banner
-import miao.kmirror.wanndroid.compose.bean.CoinBean
-import miao.kmirror.wanndroid.compose.bean.LoginBean
-import miao.kmirror.wanndroid.compose.bean.PageResponse
-import miao.kmirror.wanndroid.compose.bean.TreeBean
+import miao.kmirror.wanndroid.compose.network.bean.ApiResponse
+import miao.kmirror.wanndroid.compose.network.bean.ArticleDTO
+import miao.kmirror.wanndroid.compose.network.bean.BannerDTO
+import miao.kmirror.wanndroid.compose.network.bean.CoinInfoDTO
+import miao.kmirror.wanndroid.compose.network.bean.PageDTO
+import miao.kmirror.wanndroid.compose.network.bean.TreeDTO
+import miao.kmirror.wanndroid.compose.network.bean.UserInfoDTO
 
 interface WanAndroidApi {
     @GET("banner/json")
-    suspend fun getBanner(): ApiResponse<List<Banner>>
+    suspend fun getBanner(): ApiResponse<List<BannerDTO>>
 
     @GET("article/list/{curPage}/json")
     suspend fun getArticle(
         @Path("curPage") curPage: Int = 0,
         @Query("cid") cid: Int? = null
-    ): ApiResponse<PageResponse<Article>>
+    ): ApiResponse<PageDTO<ArticleDTO>>
 
     @GET("tree/json")
-    suspend fun getTreeBean(): ApiResponse<List<TreeBean>>
+    suspend fun getTreeBean(): ApiResponse<List<TreeDTO>>
 
 
     /**
@@ -33,11 +33,18 @@ interface WanAndroidApi {
      * */
     @POST("user/login")
     @FormUrlEncoded
-    suspend fun login(@Field("username") username: String, @Field("password") password: String): ApiResponse<LoginBean?>
+    suspend fun login(@Field("username") username: String, @Field("password") password: String): ApiResponse<UserInfoDTO?>
+
+    /**
+     * 获取用户信息
+     */
+    @GET("user/lg/userinfo/json")
+    suspend fun getUserInfo(): ApiResponse<UserInfoDTO>
+
 
     /**
      * 获取积分
      */
     @GET("lg/coin/userinfo/json")
-    suspend fun getCoin(): ApiResponse<CoinBean>
+    suspend fun getCoin(): ApiResponse<CoinInfoDTO>
 }

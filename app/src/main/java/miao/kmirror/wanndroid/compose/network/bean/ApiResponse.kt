@@ -1,4 +1,4 @@
-package miao.kmirror.wanndroid.compose.bean
+package miao.kmirror.wanndroid.compose.network.bean
 
 
 import kotlinx.serialization.SerialName

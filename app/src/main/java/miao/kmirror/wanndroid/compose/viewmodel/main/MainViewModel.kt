@@ -4,8 +4,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import miao.kmirror.wanndroid.compose.bean.Article
-import miao.kmirror.wanndroid.compose.bean.Banner
+import miao.kmirror.wanndroid.compose.network.bean.ArticleDTO
+import miao.kmirror.wanndroid.compose.network.bean.BannerDTO
 import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import org.koin.android.annotation.KoinViewModel
 
@@ -14,8 +14,8 @@ import org.koin.android.annotation.KoinViewModel
 class MainViewModel(
     private val wanAndroidRepository: WanAndroidRepository
 ) : ViewModel() {
-    val bannerList = mutableStateListOf<Banner>()
-    val articleList = mutableStateListOf<Article>()
+    val bannerDTOList = mutableStateListOf<BannerDTO>()
+    val articleDTOList = mutableStateListOf<ArticleDTO>()
     private var curPage = 0
 
     fun initData() {
@@ -26,7 +26,7 @@ class MainViewModel(
 
     private fun loadBanner() {
         viewModelScope.launch {
-            bannerList.addAll(wanAndroidRepository.getBanner().data)
+            bannerDTOList.addAll(wanAndroidRepository.getBanner().data)
         }
     }
 
@@ -35,7 +35,7 @@ class MainViewModel(
         viewModelScope.launch {
             val responseData = wanAndroidRepository.getArticle(curPage)
             curPage = responseData.data.curPage
-            articleList.addAll(responseData.data.datas)
+            articleDTOList.addAll(responseData.data.datas)
         }
     }
 }

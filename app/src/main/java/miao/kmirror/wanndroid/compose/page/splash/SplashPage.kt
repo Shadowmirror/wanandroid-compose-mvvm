@@ -1,5 +1,6 @@
 package miao.kmirror.wanndroid.compose.page.splash
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,12 +23,19 @@ import kotlinx.coroutines.withContext
 import miao.kmirror.wanndroid.compose.page.MainActivity
 import miao.kmirror.wanndroid.compose.page.NavMainTab
 import miao.kmirror.wanndroid.compose.page.NavSplash
+import miao.kmirror.wanndroid.compose.viewmodel.app.AppViewModel
+import org.koin.androidx.compose.koinViewModel
 
+@SuppressLint("ContextCastToActivity")
 @Composable
-fun SplashPage(navHostController: NavHostController) {
+fun SplashPage(
+    navHostController: NavHostController,
+    appViewModel: AppViewModel = koinViewModel<AppViewModel>(),
+) {
     var countdown by remember { mutableIntStateOf(1) }
     val current = LocalContext.current as MainActivity
     LaunchedEffect(Unit) {
+        appViewModel.autoLogin()
         while (countdown > 0) {
             delay(1000)
             if (current.hasWindowFocus()) {

@@ -1,11 +1,11 @@
-package miao.kmirror.wanndroid.compose.bean
+package miao.kmirror.wanndroid.compose.network.bean
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginBean(
+data class UserInfoDTO(
     @SerialName("admin")
     val admin: Boolean,
     @SerialName("chapterTops")
@@ -13,13 +13,13 @@ data class LoginBean(
     @SerialName("coinCount")
     val coinCount: Int,
     @SerialName("collectIds")
-    val collectIds: List<String>,
+    val collectIds: List<Int>,
     @SerialName("email")
     val email: String,
     @SerialName("icon")
     val icon: String,
     @SerialName("id")
-    val id: Int,
+    val id: Long,
     @SerialName("nickname")
     val nickname: String,
     @SerialName("password")

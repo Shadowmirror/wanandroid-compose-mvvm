@@ -23,7 +23,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import miao.kmirror.wanndroid.compose.bean.TreeBean
+import miao.kmirror.wanndroid.compose.network.bean.TreeDTO
 import miao.kmirror.wanndroid.compose.viewmodel.tree.TreeViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -37,7 +37,7 @@ fun TreePage(
     treeViewModel: TreeViewModel = koinViewModel()
 ) {
     val collectAsState by treeViewModel.pageState.collectAsState()
-    val treeBeanList by remember { derivedStateOf { treeViewModel.treeBeanList } }
+    val treeBeanList by remember { derivedStateOf { treeViewModel.treeDTOList } }
 
     LaunchedEffect(Unit) {
         if (treeBeanList.isEmpty()) {
@@ -95,10 +95,10 @@ fun TreePage(
 
 
 @Composable
-fun SecondaryTabScreen(parentPage: Int, treeBeanList: SnapshotStateList<TreeBean>) {
+fun SecondaryTabScreen(parentPage: Int, treeDTOList: SnapshotStateList<TreeDTO>) {
 
     val scope = rememberCoroutineScope()
-    val pagerState = rememberPagerState(pageCount = { treeBeanList[parentPage].children.size })
+    val pagerState = rememberPagerState(pageCount = { treeDTOList[parentPage].children.size })
 
     Column {
         ScrollableTabRow(
@@ -112,7 +112,7 @@ fun SecondaryTabScreen(parentPage: Int, treeBeanList: SnapshotStateList<TreeBean
             }
 
         ) {
-            treeBeanList[parentPage].children.forEachIndexed { index, childDir ->
+            treeDTOList[parentPage].children.forEachIndexed { index, childDir ->
                 Tab(
                     selected = pagerState.currentPage == index,
                     onClick = {
@@ -130,7 +130,7 @@ fun SecondaryTabScreen(parentPage: Int, treeBeanList: SnapshotStateList<TreeBean
             state = pagerState,
             modifier = Modifier.weight(1f)
         ) { page ->
-            TreeDetailPage(treeBeanList[parentPage].children[page].id)
+            TreeDetailPage(treeDTOList[parentPage].children[page].id)
         }
     }
 }

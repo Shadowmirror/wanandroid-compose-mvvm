@@ -17,12 +17,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import miao.kmirror.wanndroid.compose.bean.Article
+import miao.kmirror.wanndroid.compose.network.bean.ArticleDTO
 import miao.kmirror.wanndroid.compose.page.webview.FullScreenWebViewDialog
 import miao.kmirror.wanndroid.compose.utils.toAnnotatedString
 
 @Composable
-fun CardItem(article: Article = Article.getSampleObject()) {
+fun CardItem(articleDTO: ArticleDTO = ArticleDTO.getSampleObject()) {
     var showDialog by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
@@ -46,17 +46,17 @@ fun CardItem(article: Article = Article.getSampleObject()) {
                 Text(
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.labelLarge,
-                    text = article.author.ifBlank { article.shareUser }
+                    text = articleDTO.author.ifBlank { articleDTO.shareUser }
                 )
 
                 Text(
                     style = MaterialTheme.typography.labelMedium,
-                    text = article.niceDate.ifBlank { article.niceShareDate }
+                    text = articleDTO.niceDate.ifBlank { articleDTO.niceShareDate }
                 )
 
             }
             Text(
-                text = article.title.toAnnotatedString(),
+                text = articleDTO.title.toAnnotatedString(),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(vertical = 3.dp)
             )
@@ -64,12 +64,12 @@ fun CardItem(article: Article = Article.getSampleObject()) {
             Text(
                 color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.labelMedium,
-                text = "${article.superChapterName} / ${article.chapterName}"
+                text = "${articleDTO.superChapterName} / ${articleDTO.chapterName}"
             )
         }
     }
     if (showDialog) {
-        FullScreenWebViewDialog(article.link) {
+        FullScreenWebViewDialog(articleDTO.link) {
             showDialog = false
         }
     }

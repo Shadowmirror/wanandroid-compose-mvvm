@@ -1,11 +1,11 @@
-package miao.kmirror.wanndroid.compose.bean
+package miao.kmirror.wanndroid.compose.network.bean
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PageResponse<T>(
+data class PageDTO<T>(
     @SerialName("curPage")
     val curPage: Int,
     @SerialName("datas")
