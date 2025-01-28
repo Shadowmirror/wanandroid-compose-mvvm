@@ -1,6 +1,8 @@
 package miao.kmirror.wanndroid.compose.repository
 
 import android.app.Application
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import miao.kmirror.wanndroid.compose.database.WanAndroidDbService
 import miao.kmirror.wanndroid.compose.database.entity.UserCustomEntity
 import miao.kmirror.wanndroid.compose.database.entity.UserInfoEntity
@@ -19,8 +21,9 @@ class WanAndroidRepository(
     private val wanAndroidApiService: WanAndroidApiService,
     private val wanAndroidDbService: WanAndroidDbService,
 ) {
-    private var mCurrentUser: UserInfoEntity = UserInfoEntity()
-
+    // 使用 MutableStateFlow 存储当前用户信息
+    private val _currentUser = MutableStateFlow<UserInfoEntity>(UserInfoEntity())
+    val currentUser: StateFlow<UserInfoEntity> get() = _currentUser
 
     suspend fun getBanner(): ApiResponse<List<BannerDTO>> {
         return wanAndroidApiService.wanAndroidApi.getBanner()
@@ -94,10 +97,10 @@ class WanAndroidRepository(
                 currentUser = wanAndroidDbService.publicDatabase.userInfoDao().getById(WanAndroidDbService.GUEST_ID) ?: UserInfoEntity().apply { isCurrentUser = true }
             }
         }
-        mCurrentUser = currentUser
-        wanAndroidDbService.publicDatabase.userInfoDao().login(mCurrentUser.id)
-        wanAndroidDbService.switchUserDatabase(mCurrentUser.id.toString())
-        return mCurrentUser
+        // 更新 MutableStateFlow 的值
+        _currentUser.value = currentUser
+        wanAndroidDbService.switchUserDatabase(currentUser.id.toString())
+        return currentUser
     }
 
 

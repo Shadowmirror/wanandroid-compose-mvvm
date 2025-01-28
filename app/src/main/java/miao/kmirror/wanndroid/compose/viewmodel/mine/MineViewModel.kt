@@ -5,10 +5,12 @@ import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import miao.kmirror.wanndroid.compose.MyApp
 import miao.kmirror.wanndroid.compose.database.WanAndroidDbService
 import miao.kmirror.wanndroid.compose.database.entity.UserCustomEntity
+import miao.kmirror.wanndroid.compose.database.entity.UserInfoEntity
 import miao.kmirror.wanndroid.compose.repository.WanAndroidRepository
 import miao.kmirror.wanndroid.compose.utils.toPrettyJson
 import org.koin.android.annotation.KoinViewModel
@@ -20,6 +22,7 @@ class MineViewModel(private val wanAndroidRepository: WanAndroidRepository) : Vi
     var username = mutableStateOf("")
     var password = mutableStateOf("")
 
+    val currentUser: StateFlow<UserInfoEntity> get() = wanAndroidRepository.currentUser
 
     fun login() {
         if (username.value.isBlank() || password.value.isBlank()) {
