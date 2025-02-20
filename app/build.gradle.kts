@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -57,9 +57,12 @@ android {
         schemaDirectory("$projectDir/schemas")
         generateKotlin = true
     }
+
 }
 
 dependencies {
+
+    implementation(files("./libs/mylibrary-release.aar"))
 
     implementation(libs.room.runtime.android)
     ksp(libs.room.compiler)
